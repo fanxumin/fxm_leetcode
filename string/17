@@ -1,0 +1,40 @@
+17
+
+Letter Combinations of a Phone Number
+
+解法：可以看作是一棵树的DFS遍历
+
+public class Solution {
+    public  List<String> letterCombinations(String digits) {
+                List<String> result=new ArrayList<String>();
+        if (digits.length()==0){
+            return result;
+        }
+        String[] mapstr=new String[10];
+        mapstr[0]="";
+        mapstr[1]="";
+        mapstr[2]="abc";
+        mapstr[3]="def";
+        mapstr[4]="ghi";
+        mapstr[5]="jkl";
+        mapstr[6]="mno";
+        mapstr[7]="pqrs";
+        mapstr[8]="tuv";
+        mapstr[9]="wxyz";
+        char[] middleTemp=new char[digits.length()];
+        doDFS(digits,0,middleTemp,mapstr,result);
+        return result;
+    }
+
+    public  void doDFS(String digits,int depth,char[] middleTemp,String[] mapStr,List<String> result){
+        if (depth==digits.length()){
+            result.add(new String(middleTemp));
+            return;
+        }
+        int l=mapStr[digits.charAt(depth)-'0'].length();
+        for (int i=0;i<l;++i){
+            middleTemp[depth]=mapStr[digits.charAt(depth)-'0'].charAt(i);
+            doDFS(digits,depth+1,middleTemp,mapStr,result);
+        }
+    }
+}
