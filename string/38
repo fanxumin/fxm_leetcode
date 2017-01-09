@@ -1,0 +1,29 @@
+38
+
+    public static String countAndSay(int n) {
+        String str="1";
+        for (int i=1;i<n;++i){
+            str=saying(str);
+        }
+        return str;
+    }
+
+    public static String saying(String str){
+        //读出当前字符串
+        StringBuilder sr=new StringBuilder();
+        if (str.length()==1){
+            sr.append("1").append(str);
+            return sr.toString();
+        }
+        int count=1;
+        for (int i=1;i<str.length();++i){
+            if (str.charAt(i)==str.charAt(i-1)){
+                count++;
+            }else {
+                sr.append(count).append(str.charAt(i-1));
+                count=1;
+            }
+        }
+        sr.append(count).append(str.charAt(str.length()-1));
+        return sr.toString();
+    }
