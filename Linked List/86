@@ -1,0 +1,21 @@
+86
+
+    public ListNode partition(ListNode head, int x) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode p = new ListNode(0), q = new ListNode(0);
+        ListNode s1 = p, s2 = q;
+        while (head != null) {
+            if (head.val < x) {
+                p.next=head;
+                p=p.next;
+            } else {
+                q.next=head;
+                q=q.next;
+            }
+            head = head.next;
+        }
+        q.next=null;
+        p.next=s2.next;
+        return s1.next;
+    }
