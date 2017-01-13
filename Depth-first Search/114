@@ -1,0 +1,21 @@
+  114
+
+  public void flatten(TreeNode root){
+        TreeNode temp;
+        TreeNode current;
+        while (root!=null){
+            if (root.left!=null){
+                temp=root.right;
+                root.right=root.left;
+                if (temp!=null){
+                    current=root.left;
+                    while (current.right!=null){
+                        current=current.right;
+                    }
+                    current.right=temp;
+                }
+                root.left=null;
+            }
+            root=root.right;
+        }
+    }
