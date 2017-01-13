@@ -1,0 +1,22 @@
+187
+
+    public  List<String> findRepeatedDnaSequences(String s) {
+        Map<String,Integer> hs=new HashMap<String, Integer>();
+        List<String> resultList=new ArrayList<String>();
+        int len=s.length()-10;
+        for (int i=0;i<=len;++i){
+            //取出当前字符串
+            String currentStr=s.substring(i,i+10);
+            if (hs.containsKey(currentStr)){
+                hs.put(currentStr,hs.get(currentStr)+1);
+            }else {
+                hs.put(currentStr,1);
+            }
+        }
+        //遍历Map，搜索结果
+        for (Map.Entry<String,Integer> entry:hs.entrySet()){
+            if (entry.getValue()>1)
+                resultList.add(entry.getKey());
+        }
+        return resultList;
+    }
