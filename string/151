@@ -1,0 +1,30 @@
+  151. Reverse Words in a String
+
+
+    //要小心句子最前面，最后面，以及中间的连续空格
+    public static String reverseWords(String s) {
+        //先将整个句子逆序
+        char[] news= reverseSingle(s.trim()).trim().toCharArray();
+        StringBuilder result=new StringBuilder();
+        StringBuilder current=new StringBuilder();
+        //再遍历整个句子，将其中每一个单词逆序
+        for (char c:news){
+            if (c==' '&&current.length()>0){
+                //如果当前是空格，并且current长度大于0，意味着一个单词已经生成了
+                result.append(reverseSingle(current.toString())).append(' ');
+                current=new StringBuilder();
+            }else if (c!=' ')
+                current.append(c);
+        }
+        result.append(reverseSingle(current.toString()));
+        return result.toString();
+    }
+
+    //用来逆序单个字符串
+    public static String reverseSingle(String word){
+        StringBuilder sr=new StringBuilder();
+        char[] c=word.toCharArray();
+        for (int i=c.length-1;i>=0;--i)
+            sr.append(c[i]);
+        return sr.toString();
+    }
