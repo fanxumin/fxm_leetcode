@@ -1,0 +1,45 @@
+ 25
+
+
+
+    public static ListNode inverse(ListNode head, int k){
+        if (head==null||k==1)
+            return head;
+        ListNode pre=head,last=head;
+        ListNode q=new ListNode(0),newHead=q;//前一组最后一个结点
+        int f=0;//0表示是第一组的
+        int count=1;
+        while (head!=null){
+            if (count<k){
+                head=head.next;
+                last=head;
+                count++;
+            }else {
+                //k个集齐了,开始逆序
+                head=head.next;//让head指向下一组的第一个指针
+                resign(pre,last);
+                q.next=last;
+                if (f==0){
+                    newHead=q.next;
+                    f=1;
+                }
+                q=pre;
+                pre=head;
+                count=1;
+            }
+        }
+        q.next=pre;
+        return f==0?newHead.next:newHead;
+    }
+
+    public static void resign(ListNode pre,ListNode last){
+        ListNode start=pre;
+        ListNode p=start.next,q;
+        start.next=null;
+        while (start!= last){
+            q=p.next;
+            p.next=start;
+            start=p;
+            p=q;
+        }
+    }
