@@ -1,0 +1,35 @@
+138
+
+
+    public static RandomListNode copy(RandomListNode head){
+        if (head==null)
+            return null;
+        //先在原链表每个结点后面，将该结点拷贝一遍，新结点放置在原结点的后面
+        //这样，链表的长度就扩展为原来的两倍
+        RandomListNode r=head;
+        while (r!=null){
+            RandomListNode newHead=new RandomListNode(r.label);
+            newHead.next=r.next;
+            r.next=newHead;
+            r=newHead.next;
+        }
+        //复制完毕
+        RandomListNode p=head,q;
+        while (p!=null){
+            q=p.next;
+            //做一次深拷贝
+            q.random=p.random==null?null:p.random.next;
+            p=q.next;
+        }
+        //所有结点深拷贝结束，接下来，将原先拷贝的所有结点从该链表中剥离出来
+        p=head;
+        RandomListNode pre=new RandomListNode(0),ren=pre,tmp;
+        while (p!=null){
+            tmp=p.next;
+            p.next=tmp.next;
+            p=p.next;
+            pre.next=tmp;
+            pre=pre.next;
+        }
+        return ren.next;
+    }
