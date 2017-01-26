@@ -1,0 +1,28 @@
+50
+
+
+
+    public static double myPow(double x, int n) {
+        if (n==0)
+            return 1;
+        //这里要考虑到n<0的情况
+        if (n==Integer.MIN_VALUE){
+            double res=myPow(x,-n/2);
+            return res*res;
+        }
+        if (n<0) return 1/myPow(x,-n);
+        return pow(x,n);
+    }
+
+    public static double pow(double x,int n){
+        if (n==0)
+            return 1;
+        //进来的n肯定大于0,递归下去，n最终肯定为0
+        double res=pow(x,n/2);
+        if (n%2==1){
+            //n是奇数
+            return x*res*res;
+        }else{
+            return res*res;
+        }
+    }
