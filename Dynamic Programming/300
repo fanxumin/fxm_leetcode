@@ -1,0 +1,25 @@
+ 300
+
+
+
+
+    public static int lengthOfLIS(int[] nums) {
+        int len=nums.length;
+        if (len==0)
+            return 0;
+        int[] dp=new int[len];
+        //dp[i]表示，必须以当前位置数字结尾的，最长子序列的长度
+        dp[0]=1;
+        int result=1;
+        for (int i=1;i<len;++i){
+            //计算dp dp[i]=max(dp[j]+1)  0<=j<i 且nums[j]<nums[i]
+            int max=1;
+            for (int j=0;j<i;++j){
+                if (nums[j]<nums[i])
+                    max=max>(dp[j]+1)?max:dp[j]+1;
+            }
+            dp[i]=max;
+            result=result>max?result:max;
+        }
+        return result;
+    }
