@@ -1,0 +1,16 @@
+70   
+
+
+
+    public static int climbStairs(int n) {
+        int[] res=new int[n+2];
+        res[1]=1;
+        res[2]=1;
+        if (n<=2)
+            return res[n];
+        //状态转移方程 res[k]=res[k-1]+res[k-2];
+        for (int i=3;i<=n;++i){
+            res[i]=res[i-2]+res[i-1];
+        }
+        return res[n];
+    }
