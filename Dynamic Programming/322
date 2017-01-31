@@ -1,0 +1,25 @@
+322
+
+
+
+    public static int coinChange(int[] coins, int amount) {
+        if (amount<=0)
+            return 0;
+        if (coins.length==0)
+            return -1;
+        int max=amount+1;
+        int[] dp=new int[max];//dp[i]表示当钱数为i时的最小硬币数的找零
+
+        for (int i=1;i<=amount;++i)
+            dp[i]=max;//初始化,dp[0]=0
+
+        for (int i=1;i<=amount;++i){
+            for (int j=0;j<coins.length;++j){
+                if (coins[j]<=i)
+                    dp[i]=Math.min(dp[i],dp[i-coins[j]]+1);
+            }
+        }
+        if (dp[amount]!=max)
+            return dp[amount];
+        return -1;
+    }
