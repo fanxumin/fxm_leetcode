@@ -1,0 +1,25 @@
+110
+
+
+
+    public static boolean check(TreeNode root) {
+        boolean[] res=new boolean[1];
+        res[0]=true;
+        getHeight(root,0,res);
+        return res[0];
+    }
+
+    public static int getHeight(TreeNode currentNode,int depth,boolean[] res){
+        if (currentNode==null){
+            return depth;
+        }
+        int lh=getHeight(currentNode.left,depth+1,res);
+        if (!res[0])
+            return depth;
+        int rh=getHeight(currentNode.right,depth+1,res);
+        if (!res[0])
+            return depth;
+        if (Math.abs(lh-rh)>1)
+            res[0]=false;
+        return Math.max(lh,rh);
+    }
