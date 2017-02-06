@@ -1,0 +1,47 @@
+99
+
+    public static void recoverTree(TreeNode root) {
+        int[] res = new int[2];
+        ArrayList<Integer> l = new ArrayList<Integer>();
+        midOrder(root, l);
+        //先序遍历结束，开始分析得到的序列
+        int[][] cur = new int[2][2];
+        int index = 0;
+        for (int i = 1; i < l.size(); ++i) {
+            if (l.get(i) < l.get(i - 1)) {
+                cur[index][0] = l.get(i - 1);
+                cur[index][1] = l.get(i);
+                index++;
+            }
+        }
+        if (index == 1) {
+            //只有一次逆序出现
+            res[0] = cur[0][1];
+            res[1] = cur[0][0];
+        } else {
+            res[0] = Math.min(cur[0][0], cur[1][1]);
+            res[1] = Math.max(cur[0][0], cur[1][1]);
+        }
+
+        //修复二叉树
+        recoverTree(root, res);
+    }
+
+    public static void midOrder(TreeNode currentNode, ArrayList<Integer> l) {
+        if (currentNode == null)
+            return;
+        midOrder(currentNode.left, l);
+        l.add(currentNode.val);
+        midOrder(currentNode.right, l);
+    }
+
+    public static void recoverTree(TreeNode currentNode, int[] res) {
+        if (currentNode == null)
+            return;
+        if (currentNode.val == res[1])
+            currentNode.val = res[0];
+        else if (currentNode.val == res[0])
+            currentNode.val = res[1];
+        recoverTree(currentNode.left, res);
+        recoverTree(currentNode.right, res);
+    }
