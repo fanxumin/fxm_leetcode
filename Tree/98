@@ -1,0 +1,36 @@
+98
+
+
+
+    //验证一棵树是否为二叉搜索树
+    //左右子树都为二叉搜索树，且左子树中最大值比当前节点小，右子树中最小值比当前节点大
+    public static boolean isValidBST(TreeNode root) {
+        if (root==null)
+            return false;
+        long[] res=chk(root);
+        return res[0]==1;
+    }
+
+    public static long[] chk(TreeNode cur){
+        long[] res=new long[]{-1,Long.MAX_VALUE,Long.MIN_VALUE};
+        long[] l=new long[]{1,Long.MAX_VALUE,Long.MIN_VALUE};
+        long[] r=new long[]{1,Long.MAX_VALUE,Long.MIN_VALUE};//第1位代表是否是二叉搜索树，第2位代表该树上的最小值，第3位代表该树上的最大值
+        if (cur.left!=null)
+            l=chk(cur.left);
+        if (l[0]==-1)
+            return res;
+        if (cur.right!=null)
+            r=chk(cur.right);
+        if (r[0]==-1)
+            return res;
+        //获取了左右子数的信息，然后进行判断
+        //若左右子树都是二叉搜索树，且左子树中最大值比当前节点小，右子树中最小值比当前节点大，则当前节点为根节点的树也是二叉搜索树
+        if (l[0]==1&&r[0]==1&&l[2]<cur.val&&r[1]>cur.val){
+            res[0]=1;//说明当前树是二叉搜索树
+            res[1]=Math.min(cur.val,l[1]);
+            res[2]=Math.max(cur.val,r[2]);
+        }else
+            res[0]=-1;//说明当前树不是二叉搜索树
+
+        return res;
+    }
