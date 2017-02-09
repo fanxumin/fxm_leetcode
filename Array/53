@@ -1,0 +1,16 @@
+53
+
+
+
+    public int maxSubArray(int[] nums) {
+        int length=nums.length;
+        int max=nums[0];
+        int count=nums[0];
+        for (int i=1;i<length;++i){
+            max=max>count?max:count;
+            if (count<0)
+                count=0;
+            count+=nums[i];
+        }
+        return max>count?max:count;
+    }
