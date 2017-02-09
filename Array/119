@@ -1,0 +1,24 @@
+119
+
+
+
+
+
+
+    public static List<Integer> getRow(int rowIndex) {
+        List<Integer> ret=new ArrayList<Integer>();
+        int[][] triangle=new int[rowIndex+1][rowIndex+1];
+        triangle[0][0]=1;
+        for (int i=1;i<rowIndex+1;++i){
+            for (int j=0;j<i+1;++j){
+                if (j>0&&j<i){
+                    triangle[i][j]=triangle[i-1][j-1]+triangle[i-1][j];
+                }else
+                triangle[i][j]=1;
+            }
+        }
+        //保存结果
+        for (int i=0;i<rowIndex+1;++i)
+            ret.add(triangle[rowIndex][i]);
+        return ret;
+    }
