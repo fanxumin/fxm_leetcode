@@ -1,0 +1,22 @@
+167
+
+
+
+
+    public static int[] twoSum(int[] numbers, int target) {
+        int length=numbers.length;
+        int i=0,j=length-1;
+        while (i<j){
+            int now=numbers[i]+numbers[j];
+            if (now==target)
+                break;
+            else if (now>target)
+                j--;
+            else
+                i++;
+        }
+        int[] ret=new int[2];
+        ret[0]=i+1;
+        ret[1]=j+1;
+        return ret;
+    }
