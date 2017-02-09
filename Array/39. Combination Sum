@@ -1,0 +1,26 @@
+39. Combination Sum
+
+
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res=new ArrayList<List<Integer>>();
+        List<Integer> cur=new ArrayList<Integer>();
+        helper(cur,res,0,0,target,candidates);
+        return res;
+    }
+
+    public static void helper(List<Integer> cur,List<List<Integer>> res,int pos,int base,int target,int[] candidates){
+        //base表示当前和
+        if (base==target){
+            res.add(new ArrayList<Integer>(cur));
+            return;
+        }
+        if (base>target){
+            return;
+        }
+        for (int i=pos;i<candidates.length;++i){
+            cur.add(candidates[i]);
+            helper(cur,res,i,base+candidates[i],target,candidates);
+            cur.remove(cur.size()-1);
+        }
+
+    }
