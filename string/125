@@ -1,0 +1,31 @@
+125
+
+
+
+
+
+    public static boolean isPalindrome(String s) {
+        if (s==null||s.isEmpty())
+            return true;
+        char[] str=s.toCharArray();
+        int len=str.length;
+        //只考虑数字和英文，若不是，则需要跳过，忽略大小写
+        List<Character> l=new ArrayList<Character>();
+        int r='A'-'a';
+        for (int i=0;i<len;++i){
+            if (str[i]>='a'&&str[i]<='z')
+                l.add(str[i]);
+            else if (str[i]>='A'&&str[i]<='Z')
+                l.add((char) (str[i]-r));
+            else if (str[i]>='0'&&str[i]<='9')
+                l.add(str[i]);
+        }
+        //检查结果
+        int i=0,j=l.size()-1;
+        while (i<j){
+            if (l.get(i)!=l.get(j))
+                return false;
+            i++;j--;
+        }
+        return true;
+    }
