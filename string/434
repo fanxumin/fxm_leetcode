@@ -1,0 +1,23 @@
+434
+
+
+
+
+
+    public static int countSegments(String s) {
+        String str = s.trim();
+        if (str.isEmpty())
+            return 0;
+        int count = 0;
+        char[] c = str.toCharArray();
+        boolean f = false;//false代表上一个不是空格,这里考虑的是出现连续空格的情况
+        for (int i = 0; i < c.length; ++i) {
+            if (c[i] == ' ') {
+                if (!f)
+                    count++;
+                f = true;
+            } else
+                f = false;
+        }
+        return count+1;
+    }
