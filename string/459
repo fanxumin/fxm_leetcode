@@ -1,0 +1,23 @@
+459
+
+
+
+
+
+    public static boolean repeatedSubstringPattern(String str) {
+        int len=str.length();
+        //char[] c=str.toCharArray();
+        for (int i=len/2;i>=1;--i){
+            if (len%i==0){
+                //开始对比这种子串长度下，是否可以构成str
+                int subCount=len/i;
+                StringBuilder r=new StringBuilder();
+                String subStr=str.substring(0,i);
+                for (int j=0;j<subCount;++j)
+                    r.append(subStr);
+                if (r.toString().equals(str))
+                    return true;
+            }
+        }
+        return false;
+    }
