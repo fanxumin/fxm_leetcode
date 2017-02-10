@@ -1,0 +1,21 @@
+367
+
+
+
+
+
+    public static boolean isPerfectSquare(int num) {
+        if (num==1)
+            return true;
+        long j=num/2,i=2;
+        while (i<=j){
+            long mid=i+(j-i)/2;
+            long product=mid*mid;
+            if (product==num)
+                return true;
+            else if (product>num)
+                j=mid-1;
+            else i=mid+1;
+        }
+        return false;
+    }
