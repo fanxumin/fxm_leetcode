@@ -1,0 +1,23 @@
+235
+
+
+
+
+
+
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        return getValue(root, p, q);
+    }
+
+    public static TreeNode getValue(TreeNode cur, TreeNode p, TreeNode q) {
+        if ((p.val < cur.val && q.val < cur.val) || (p.val > cur.val && q.val > cur.val)) {
+            //两个节点同时小与当前节点，或者两个节点同时大于当前节点
+            //若在左子树上
+            if (p.val < cur.val)
+                return getValue(cur.left, p, q);
+            else
+                return getValue(cur.right, p, q);
+        } else {
+            return cur;
+        }
+    }
