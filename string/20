@@ -1,0 +1,24 @@
+20
+
+
+
+    public static boolean isValid(String s) {
+        if (s == null || s.isEmpty()) return true;
+        Stack<Character> stack = new Stack<Character>();
+        int len = s.length();
+        char[] c = s.toCharArray();
+        stack.push(c[0]);
+        int index = 1;
+        while (index < len) {
+            //取栈顶，与下一个元素比较
+            char top = 'a';
+            if (!stack.isEmpty())
+                top = stack.peek();
+            if (top != 'a' && (top == '(' && c[index] == ')') || (top == '{' && c[index] == '}') || (top == '[' && c[index] == ']')) {
+                stack.pop();
+            } else
+                stack.push(c[index]);
+            index++;
+        }
+        return stack.isEmpty();
+    }
