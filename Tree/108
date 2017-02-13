@@ -1,0 +1,22 @@
+108
+
+
+
+    public static TreeNode sortedArrayToBST(int[] nums) {
+        if (nums==null||nums.length==0)
+            return null;
+        int len=nums.length;
+        int i=0,j=len-1;
+        return generateTree(i,j,nums);
+    }
+
+    public static TreeNode generateTree(int i,int j,int[] nums){
+        if (i<0||j<0||i>j)
+            return null;
+        int mid=i+(j-i)/2;
+        //将mid位置的节点作为这一次的根节点
+        TreeNode r=new TreeNode(nums[mid]);
+        r.left=generateTree(i,mid-1,nums);
+        r.right=generateTree(mid+1,j,nums);
+        return r;
+    }
