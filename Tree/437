@@ -1,0 +1,22 @@
+437
+
+
+
+
+    public static int pathSum(TreeNode root, int sum) {
+        if (root==null)
+            return 0;
+        return dfs(root,sum)+pathSum(root.left,sum)+pathSum(root.right,sum);
+    }
+
+    //这是遍历以当前节点为根节点时，得到符合条件的路径数量
+    public static int dfs(TreeNode currentNode,int sum){
+        int res=0;
+        if (currentNode==null)
+            return 0;
+        if (sum==currentNode.val)
+            res++;
+        res+=dfs(currentNode.left,sum-currentNode.val);
+        res+=dfs(currentNode.right,sum-currentNode.val);
+        return res;
+    }
