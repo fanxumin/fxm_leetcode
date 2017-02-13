@@ -1,0 +1,24 @@
+455
+
+
+    public static int findContentChildren(int[] g, int[] s) {
+        int count=0;
+        int lenG=g.length;
+        int lenS=s.length;
+
+        Arrays.sort(g);
+        Arrays.sort(s);
+
+        int i=0,j=0;
+        while (i<lenG&&j<lenS){
+            if (s[j]>=g[i]){
+                i++;
+                j++;
+                count++;
+            }else {
+                j++;
+            }
+        }
+
+        return count;
+    }
