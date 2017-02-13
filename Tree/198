@@ -1,0 +1,19 @@
+198
+
+
+
+    public static int rob(int[] nums) {
+        int len=nums.length;
+        if (len==0)
+            return 0;
+        else if (len==1)
+            return nums[0];
+        int[] dp=new int[len];
+        dp[0]=nums[0];
+        dp[1]=Math.max(nums[0],nums[1]);
+        for (int i=2;i<len;++i){
+            dp[i]=Math.max(dp[i-2]+nums[i],dp[i-1]);//前者代表抢劫当前房子，不抢前一栋房子，后者代表放弃当前房子
+            //这里有一点需要解释，若dp[i-1]不包含nums[i-1]，则此时dp[i-2]=dp[i-1]，此时dp[i-2]+nums[i]>dp[i-1]，可以继续推
+        }
+        return dp[len-1];
+    }
