@@ -1,0 +1,25 @@
+230
+
+
+
+
+    public static int kthSmallest(TreeNode root, int k) {
+        int[] index=new int[]{1};
+        int[] res=new int[1];
+        inorder(root,index,k,res);
+        return res[0];
+    }
+
+    public static void inorder(TreeNode cur,int[] index,int k,int[] res){
+        if (cur==null)
+            return;
+        inorder(cur.left,index,k,res);
+        if (index[0]==k){
+            res[0]=cur.val;
+            index[0]++;
+            return;
+        }else {
+            index[0]++;
+            inorder(cur.right,index,k,res);
+        }
+    }
