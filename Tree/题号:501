@@ -1,0 +1,34 @@
+题号:501
+
+
+
+
+
+    public static int[] findMode(TreeNode root) {
+        Map<Integer,Integer> hs=new HashMap<Integer, Integer>();
+        dfs(root,hs);
+        //查找结果
+        Set<Map.Entry<Integer,Integer>> s=hs.entrySet();
+        List<Integer> ret=new ArrayList<Integer>();
+        int max=0;
+        for (Map.Entry<Integer,Integer> entry:s){
+            if (entry.getValue()>max)
+                max=entry.getValue();
+        }
+        for (Map.Entry<Integer,Integer> entry:s){
+            if (entry.getValue()==max)
+                ret.add(entry.getKey());
+        }
+        int[] res=new int[ret.size()];
+        for (int i=0;i<ret.size();++i)
+            res[i]=ret.get(i);
+        return res;
+    }
+
+    public static void dfs(TreeNode currentNode,Map<Integer,Integer> hs){
+        if (currentNode==null)
+            return;
+        hs.put(currentNode.val,hs.get(currentNode.val)!=null?hs.get(currentNode.val)+1:1);
+        dfs(currentNode.left,hs);
+        dfs(currentNode.right,hs);
+    }
