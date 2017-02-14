@@ -1,0 +1,23 @@
+400
+
+
+
+    public static int findNthDigit(int n) {
+        if (n<10)
+            return n;
+        double x=1;//上限
+        double valueMax,valueMin;
+        while (true){
+            valueMax=(x-(double) 1/9)*Math.pow(10,x)+(double) 1/9;
+            if (n>valueMax){
+                x++;
+            }else
+                break;
+        }
+        valueMin=(x-(double) 1-(double) 1/9)*Math.pow(10,x-1)+(double) 1/9;
+        int c= (int) Math.ceil(n-valueMin);
+        int index=(int) (Math.pow(10,x-1)+Math.ceil(c/x)-1);
+        String indexStr=String.valueOf(index);
+        char ret=indexStr.charAt((int) ((c-1)%x));
+        return Character.getNumericValue(ret);
+    }
