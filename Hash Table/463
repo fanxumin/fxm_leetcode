@@ -1,0 +1,25 @@
+463
+
+
+
+
+
+
+    public static int islandPerimeter(int[][] grid) {
+        int count=0;
+        int row=grid.length;
+        int column=grid[0].length;
+        for (int i=0;i<row;++i){
+            for (int j=0;j<column;++j){
+                //查看当前单元格是否为1，若为1，则根据它的上方以及左方是否为1，来决定计算方式
+                if (grid[i][j]==1){
+                    count+=4;
+                    if (j>0&&grid[i][j-1]==1)
+                        count+=-2;
+                    if (i>0&&grid[i-1][j]==1)
+                        count+=-2;
+                }
+            }
+        }
+        return count;
+    }

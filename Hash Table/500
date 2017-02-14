@@ -1,0 +1,45 @@
+500
+
+
+
+
+
+
+    public static String[] findWords(String[] words) {
+        List<String> ret=new ArrayList<String>();
+        //先构造哈希表
+        String[] h=new String[]{"QWERTYUIOP","ASDFGHJKL","ZXCVBNM"};
+        int[] hs=new int[129];
+        for (int i=0;i<3;++i){
+            char[] cs=h[i].toCharArray();
+            for (int j=0;j<cs.length;++j)
+                hs[cs[j]]=i+1;
+        }
+
+        int len=words.length;
+        for (int i=0;i<len;++i){
+            char[] c=words[i].toCharArray();
+            if (c.length==1)
+                ret.add(words[i]);
+            else {
+                int index=findIndex(c[0],hs);
+                for (int j=1;j<c.length;++j){
+                    if (findIndex(c[j],hs)!=index)
+                        break;//跪了咯,不满足条件
+                    if (j==c.length-1)
+                        ret.add(words[i]);
+                }
+            }
+        }
+
+        //处理结果
+        String[] res=new String[ret.size()];
+        for (int i=0;i<ret.size();++i)
+            res[i]=ret.get(i);
+        return res;
+    }
+
+    public static int findIndex(char c,int[] hs){
+        char s=Character.toUpperCase(c);
+        return hs[s];
+    }
