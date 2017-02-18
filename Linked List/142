@@ -1,0 +1,28 @@
+142
+
+
+
+
+
+    public static ListNode detectCycle(ListNode head) {
+        if (head==null)
+            return null;
+        ListNode fast=head,slow=head;
+        while (fast.next!=null&&fast.next.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if (fast==slow){
+                //快慢指针遭遇了，说明一定有环
+                //接下来就是寻找环开始的节点
+                //先让快指针重新指向头结点
+                fast=head;
+                //快指针速度降为1，快慢指针继续走，下一次遭遇的时候，该结点就是环开始的结点
+                while (fast!=slow){
+                    fast=fast.next;
+                    slow=slow.next;
+                }
+                return fast;
+            }
+        }
+        return null;
+    }

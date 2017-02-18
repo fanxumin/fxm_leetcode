@@ -1,0 +1,38 @@
+82
+
+
+
+
+
+
+    public static ListNode deleteDuplicates(ListNode head) {
+        if (head == null)
+            return null;
+        ListNode c = head, pre = head;
+        ListNode c2 = c.next;
+        int flag = 0;
+        while (c != null && c2 != null) {
+            while (c2 != null && c.val == c2.val) {
+                flag = 1;
+                c2 = c2.next;
+            }
+            //flag等于1，说明需要进行删除操作
+            if (flag == 1) {
+                if (c == head) {
+                    pre = c2;
+                    c = pre;
+                    head = pre;
+                } else {
+                    pre.next = c2;
+                    c = c2;
+                }
+                flag = 0;
+            } else {//不需要进行删除操作
+                pre = c;
+                c = c.next;
+            }
+            if (c != null)
+                c2 = c.next;
+        }
+        return head;
+    }
