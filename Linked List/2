@@ -1,0 +1,36 @@
+2
+
+
+
+
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode pre = new ListNode(0);
+        ListNode tail = pre;
+        ListNode newNode;
+        //尾部对齐，开始计算
+        int current = 0;
+        int up = 0;
+        while (l1 != null && l2 != null) {
+            current = l1.val + l2.val + up;
+            newNode = new ListNode(current % 10);
+            tail.next = newNode;
+            tail = tail.next;
+            up = current / 10;//求得进位
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+
+        ListNode r = l1 == null ? l2 : l1;
+        while (r != null) {
+            current = r.val + up;
+            newNode = new ListNode(current % 10);
+            tail.next = newNode;
+            tail = tail.next;
+            up = current / 10;
+            r = r.next;
+        }
+
+        if (up == 1)
+            tail.next = new ListNode(1);
+        return pre.next;
+    }
